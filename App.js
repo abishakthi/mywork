@@ -14,24 +14,7 @@ const initialMermaidChart = `
     C-->D;
 `;
 
-const initialBpmnXml = `<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
-                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
-                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
-                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
-                  targetNamespace="http://bpmn.io/schema/bpmn">
-  <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:startEvent id="StartEvent_1"/>
-  </bpmn:process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
-        <dc:Bounds x="173" y="102" width="36" height="36"/>
-      </bpmndi:BPMNShape>
-    </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
-</bpmn:definitions>`;
+const initialBpmnXml = `LOADING.....`;
 
 function App() {
   const [chart, setChart] = useState(initialMermaidChart);
@@ -63,6 +46,87 @@ function App() {
   const mermaidRef = useRef();
   const bpmnRef = useRef();
   const dividerRef = useRef();
+
+  const handleExportBPMN = async () => {
+    setLoading(true);
+    let content;
+      if (uploadedFile) {
+  
+        content = await readFileContent(uploadedFile);
+      } else if (input) {
+        content = input;
+      } else {
+        console.error('No input provided');
+        return;
+      }
+  
+      try {
+        const formData = new FormData();
+        formData.append('file', uploadedFile);
+        formData.append('inputText', input);
+  
+        if (uploadedFile) {
+          formData.append('file', uploadedFile);
+        }
+  
+        const messages = [
+          {
+            role: 'user',
+            content,
+          },
+        ];
+  
+        const { data } = await axios.post(`http://11.15.209.141:8080/api/v1/ConvertBPMN`,
+          formData,
+          {
+            params: {
+              model: 'gpt35',
+            },
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          }
+        );
+  
+  
+      console.log('Complete Response:', data);
+      setXml(data.response);
+      setPrompt(data.prompt);
+     
+  
+    } catch (error) {
+        console.error('Error fetching reply:', error);
+        setOpen(true);
+        setPopmessage(error.response.data);
+    } finally {
+      setLoading(false);
+    }
+  };
+   //function to clear conversation history
+    const handleClearHistory = async () => {
+      try {
+          await axios.post(`http://${ipaddress}:8080/api/v1/clearHistory`);
+          setOpen(true);
+          setPopmessage("New session initiated");
+      } catch (error) {
+          console.error('Error clearing conversation history:', error);
+      }
+  };
+  
+    useEffect(() => {
+      handleClearHistory(); //this function will execute everytime time user reload the page
+    }, []);
+  
+    //useEffect(() => {
+      //if (isBpmn) {
+        //handleExportBPMN();
+      //}
+    //}, [isBpmn]);
+    useEffect(() => {
+      if (activeTab === 'code') {
+        handleExportBPMN();
+      }
+    }, [activeTab]);
 
 
 
@@ -332,7 +396,40 @@ const switchTab = (tab) => {
     }
     
   };
+  const exportAsMarkdown = () => {
+    // Get the content of the textarea
+    const content = isBpmn ? xml : chart;
+    
+    // Construct the markdown content with triple backticks
+    const markdownContent = "```mermaid\n" + content + "\n```";
+    
+    // Create a Blob containing the markdown content
+    const blob = new Blob([markdownContent], { type: "text/markdown" });
+    
+    // Create a link element
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "chart.md"; // File name
+    document.body.appendChild(a);
+    
+    // Click the link to trigger the download
+    a.click();
+    
+    // Clean up
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+};
+const exportAsBpmn = () =>{
+const bpmnCode = isBpmn ? xml : chart;
+console.log('BPMN code:', bpmnCode);
+const blob = new Blob([bpmnCode], { type: 'text/xml;charset=utf-8' });
 
+const link = document.createElement('a');
+link.href = URL.createObjectURL(blob);
+link.download = 'diagram.bpmn';
+link.click();
+}
   const scrollToBottom = () => {
     if (promptRef.current) {
         promptRef.current.scrollTop = promptRef.current.scrollHeight;
@@ -370,6 +467,8 @@ useEffect(() => {
               </button>
               <button className="export" onClick={exportBpmnAsSVG} >Export as SVG</button>
               <button className="export" onClick={exportBpmnAsPNG} >Export as PNG</button>
+              <button className="export" onClick={exportAsBpmn} >Export as BPMN</button>
+              <button className="export"  >Export to blueworks</button>
               <div className='bpcon' style={{marginLeft:'10px'}}>
               <label>
                 Task Color
@@ -405,6 +504,7 @@ useEffect(() => {
               </button>
               <button className="export" onClick={exportMermaidAsSVG}>Export as SVG</button>
               <button className="export" onClick={exportMermaidAsPNG}>Export as PNG</button>
+              <button className="export" onClick={exportAsMarkdown}>Export as .md</button>
               <div className="mermaid-controls">
                 
                                <label className='r'style={{fontSize:'23px',fontWeight:'bold',fontFamily:'serif'}}> Rough</label> 
@@ -566,6 +666,7 @@ useEffect(() => {
           {activeTab === 'code' && (
     <>
         <h1 className='tit'>{isBpmn ? 'BPMN CODE' : 'MERMAID CODE'}</h1>
+       
         <textarea
             value={isBpmn ? xml : chart}
             onChange={handleInputChange}
