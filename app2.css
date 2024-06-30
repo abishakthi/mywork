@@ -1,0 +1,616 @@
+/* src/App.css */
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3f51b5;
+  color: white;
+  padding: 10px;
+  background-color: #401664;
+  margin: 0;
+  
+
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  
+}
+
+ .controls button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #4caf50;
+  background-color:white;
+  color: black;
+  border-radius: 3px;
+  border-color: #000;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+ .controls button:hover {
+  background-color: gainsboro;
+
+}
+
+ .mermaid-controls {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+ .mermaid-controls label {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.mermaid-controls input {
+  margin-left: 5px;
+}
+
+ .mermaid-controls .fullscreen,
+.controls .export {
+  
+  color: black;
+  margin-left: 10px;
+}
+.mermaid-controls,.bpcon{
+  border: 3px solid black;
+  border-radius: 5px;
+  padding-left:5px;
+  padding-right: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-color: white;
+  background-color: white;
+  color: #000;
+}
+
+
+.container {
+  display: flex;
+  flex: 1;
+  height: 100%;
+}
+
+.left, .right {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.left {
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  border: 2px solid #7c3aed;
+  border-color: black;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    background-color: #fbe3e8;
+    background-color: #e6e0ff;
+    background-color: white;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 0;
+  border-right: 1px solid #ddd;
+  border: 2px solid #7c3aed;
+  border-color: #000;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    background-color: #e6e0ff;
+    background-color: white;
+
+}
+
+textarea {
+  width: 100%;
+  height: calc(100% - 80px);
+  height: 80%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 16px;
+  border-radius: 20px;
+  border:solid 2px black;
+  border-width: 5px;
+  border-color: black;
+  background-color: whitesmoke ;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.diagramContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 1200px;
+  box-sizing: border-box;
+  font-family: monospace;
+  font-size: 16px;
+  position: relative;
+}
+
+.innerDiagramContainer {
+  width: 1200vh;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.innerDiagramContainer svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: auto;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+
+.diagramContainer .djs-powered-by {
+  display: none !important;
+}
+
+.divider {
+  width: 5px;
+  background-color: #ddd;
+  cursor: ew-resize;
+  position: relative;
+  z-index: 10;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+
+
+.btn-equal-size {
+  width: 200px;
+  margin-top: 10px;
+  background-color: #007bff;
+
+ 
+  border-radius: 10px;
+  
+  transition: background-color 0.3s;
+  font-size: 17px;
+ font-weight: bold;
+ color: #ffffff;
+ 
+}
+.shadow__btn {
+  padding: 10px 20px;
+  border: none;
+  font-size: 17px;
+  color: #fff;
+  border-radius: 7px;
+  letter-spacing: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+}
+
+.shadow__btn {
+  border-radius: .25rem;
+  text-transform: uppercase;
+  font-style: normal;
+  font-weight: 400;
+  padding-left: 25px;
+  padding-right: 25px;
+  color: #fff;
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  height: 40px;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 14px;
+  letter-spacing: 1.2px;
+  transition: .2s .1s;
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  overflow: hidden;
+}
+
+.shadow__btn:hover {
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-textarea {
+  width: 100%;
+  resize: none; /* Prevent manual resizing */
+}
+
+.thick-border {
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.chattt {
+  
+  margin-top: 10px;
+}
+
+.chat-textarea {
+  flex-grow: 1;
+  padding-right: 80px; /* Ensure there's space for the button inside the textarea */
+}
+
+.send-button {
+ 
+  margin-top: 20px;
+
+  margin-left: 720px;
+  margin-top: 0px;
+  height: 60px;
+  
+
+ 
+
+
+
+
+
+  position:relative;
+  right: 5px;
+  bottom: 0px;
+  
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid black;
+  background-color: #007bff;
+  color: white;
+  margin-right: 900px;
+
+
+
+}
+
+
+
+.textarea-container {
+  position: relative;
+}
+
+.textarea-container textarea {
+ 
+ 
+  padding-right: 70px; /* Space for the button */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+  border-radius: 40px;
+}
+
+.textarea-container .send-button {
+  position:inherit;
+  top: 0;
+  right: 70;
+  left: 720px;
+  height: 60px;
+  /* Adjust button width as needed */
+  margin-left: 10px;
+  width: fit-content;
+  border-radius: 40px;
+  
+}
+
+
+
+.fullscreen-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.fullscreen-btn svg {
+  height: 100%;
+}
+.fullscreen-btn:hover {
+  width: 30px;
+  height: 30px;
+  overflow: visible;
+}
+.tooltip {
+  position: absolute;
+  top: -40px;
+  background-color: rgba(0, 0, 0, 0.753);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.8em;
+  transition: all 0.3s;
+  opacity: 0;
+}
+.fullscreen-btn:hover .tooltip {
+  transform: translateY(2.5px);
+  opacity: 1;
+}
+
+.scen{
+  border-width: 5px;
+  border-color: black;
+  background-color: whitesmoke ;
+}
+input[type=file]::file-selector-button {
+  margin-right: 10px;
+  border: none;
+  background: #084cdf;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: medium;
+  margin-left: 5px;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
+}
+
+.containe {
+  position: relative;
+  display: inline-block;
+  width: 100%; /* Adjusted width to accommodate button */
+  
+}
+
+.containe-textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  padding-right: 70px; /* Extra space for the button */
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  border-width: 5px;
+  border-color: black;
+  background-color: whitesmoke ;
+}
+
+.btn-container {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  margin-bottom: 6px;
+}
+
+.btn-container button {
+  padding: 5px 10px;
+  font-size: 19px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 40px;
+  outline: none;
+  transition: background-color 0.3s;
+  height: 40px;
+  width: fit-content;
+}
+
+.btn-container button:hover {
+  background-color: #0056b3;
+}
+
+.r{
+  font-size: large;
+  font-weight: 500;
+}
+.tit{
+  -webkit-clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  clip-path: polygon(0 0,0 0,100% 0,100% 0,100% calc(100% - 15px),calc(100% - 15px) 100%,15px 100%,0 100%);
+  
+  font-size: 6rem;
+  font-weight: bold;
+ 
+  background-image: linear-gradient(90deg,#1c1c1c,#6220fb);
+  border: 0 solid;
+  
+  cursor: pointer;
+  transition: all .3s ease-in;
+  padding-right: 30px;
+  padding-left: 30px;
+  align-items: center;
+  padding-left: 300px;
+  height: 50px;
+  padding-top: 30px;
+  font-size: larger;
+  color: white;
+}
+.left-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #401664;
+  color: white;
+  padding: 10px 20px;
+  border-right: 2px solid #7c3aed;
+  margin-top: 0px;
+
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+  
+}
+
+.tab-button {
+  background-color: #f7fafd; /* Light blue background color */
+  border: 1px solid #dce1e4; /* Light gray border */
+  border-radius: 6px; /* Rounded corners */
+  padding: 10px 20px; /* Padding to make the button size similar */
+  color: white; /* Text color */
+  font-size: 16px; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+  width: 100%; /* Full width */
+  text-align: center; /* Center text */
+  margin-bottom: 10px;
+}
+
+/* Active tab button style */
+.tab-button.active {
+  border: white;
+  border-color: white; /* Darker border when active */
+  border-radius: 4px;
+  color: #401664;
+}
+
+/* Hover effect for buttons */
+.tab-button:hover {
+  background-color: #e7edf1; /* Slightly darker blue on hover */
+  color: white;
+}
+.export1{
+  border-radius: 4px;
+  color: black;
+  border-color: black;
+  background-color: white;
+
+
+}
+
+/* Basic tab styling */
+.tabs {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.tab {
+  
+  color: #000;
+  
+  padding: 10px 20px;
+  margin-bottom: 10px; /* Space between tabs */
+  text-align: center;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tab:hover {
+  background-color: #D1E7F2;
+  border-color: #C0D3EB;
+}
+
+/* Active tab styling */
+.tab-active {
+  background-color: #D1E7F2;
+  border-color: #C0D3EB;
+}
+
+/* Optional: To make the tabs horizontal instead of vertical */
+.tabs-horizontal {
+  flex-direction: row;
+}
+
+.tab-horizontal {
+  margin-right: 10px; /* Space between tabs */
+}
+
